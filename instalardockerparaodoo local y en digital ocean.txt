@@ -1,0 +1,62 @@
+﻿https://github.com/docker/toolbox/releases
+para descargar Docker ToolBox 
+docker toolBox.exe
+luego de instalar todo
+(antes de todo eso , la maquina debe permitir virtualizacion)
+
+creamos docker machine
+1-docker-machine create default
+2-docker-machine start default(iniciar maquina virtual)
+3-docker-machine env default (creamos el entorno virtual)
+4-luego saldran unas cosas y copíamos lo que esta ahi
+5-luego revisamos los contenedores con "docker ps"docker 
+6-luego que esta bien , nos vamos a la consola y en la memoria, corremos el scrip que crea los contenedores de docker 
+7-vamos a la raiz , buscamos docker-compose
+8-luego de eso escribimos el comando "docker-compose up -d"
+9-luego de instalar todos los archivos con el scrip , escribis el comando "docker ps"(para ver los procesos que estan corriendo, nombre del contenedora)
+10-para mover las carpetas e instalar todas , se escribe "docker exec -ti odoo_web_1 bash"
+11- para mover las carpetas , se escribe el siguiente comando "mv modulos/* /mnt/extra-addons"
+12-luego queda como debe de ser y colocamos esta ip : http://192.168.99.100:8069/
+
+docker machine solo funcionan los ssh en una computadora
+(de preferencia una computadora)
+
+Para encenderlo de un solo , se abris en "tareas programadas"
+1-Abrir programador de tareas 
+2-crear una nueva carpeta , se le coloca el nombre de la carpeta.
+3-Click derecho a la carpeta y crear una nueva carpeta
+4-escribimos el script
+http://192.168.99.100:8069/
+
+
+permisos para ocupar el api con mi cuenta
+(crear doplets , borrar droplets)
+**e1177221255475d67d6e1e0f90f4ce2a4f0ccd4d30a11e606484ad3d9681fa7c**
+
+Para encenderlo de un solo , se abris en 
+docker container exec -u 0 -it nombre_container bash
+docker container exec -u 0 -it dev_web_1 bash
+
+
+
+
+
+
+
+
+
+Si es en DigitalOcean se usa este comando.
+1-docker-machine create --driver digitalocean --digitalocean-access-token e1177221255475d67d6e1e0f90f4ce2a4f0ccd4d30a11e606484ad3d9681fa7c yohalmo
+3-docker-machine env yohalmo(creamos el entorno virtual)
+9-luego de instalar todos los archivos con el scrip , escribis el comando "docker ps"(para ver los procesos que estan corriendo, nombre del contenedora)
+10-para mover las carpetas e instalar todas , se escribe "docker exec -ti odoo_do_web_1 bash"
+2-generar llave publica y privada (esto es para no copiar modulos , sino para descargarlos del repositorio de GitHub)
+3-luego se escriben estos comandos "ssh-keygen -t rsa -b 4096 -C "rodrigolemusmussol@gmail.com""
+4-eval $(ssh-agent -s)
+5-ssh-add ~/.ssh/id_rsa
+6-cat ~/.ssh/id_rsa.pub
+7-mover a la carpeta mnt debo escribir el siguiente comando : cd mnt 
+8-luego se clona el repositorio con este comando : git clone --branch fernando git@github.com:carlosmoran97/custom-modules.git extra-addons (la ip depende del repositorio que escogere)
+7-luego me genera la llave publica y la pego en GitHub
+8-chmod -R 777 /mnt/extra-addons(para darle permisos a la carpeta extra addons)
+9-docker restart odoo_do_web_1
